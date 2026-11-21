@@ -37,24 +37,53 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 
 ## Program
 
-#Cleaning and Preparing Retail Data using Pandas
+import pandas as pd
 
-#Step 1: Create a sample retail dataset
+# Step 1: Create a sample retail dataset
+data = {
+    "Order_ID": [101, 102, 103, 104, 105, 105, 106, 107],
+    "Product": ["Laptop", "Tablet", "Phone", "Printer", "Monitor", "Monitor", "Tablet", "Laptop"],
+    "Region": ["East", "West", "North", "South", "East", "East", "West", None],
+    "Sales": [55000, 32000, None, 18000, 24000, 24000, 32000, 55000],
+    "Discount": [5, None, 10, 8, 5, 5, None, 8],
+    "Profit": [8000, 5000, 4000, None, 3000, 3000, 5000, 8000]
+}
 
-#Step 2: Check for missing values
+df = pd.DataFrame(data)
 
-#Step 3: Fill missing numeric values with column mean
+print("---- Original Retail Dataset ----")
+display(df)
+print("Dataset Shape:", df.shape)
 
-#Step 4: Fill missing Region with mode (most frequent value)
+# Step 2: Check for missing values
+print("\nMissing Values per Column:")
+print(df.isnull().sum())
 
-#Step 5: Remove duplicate records
+# Step 3: Fill missing numeric values with column means
+df["Sales"] = df["Sales"].fillna(df["Sales"].mean())
+df["Discount"] = df["Discount"].fillna(df["Discount"].mean())
+df["Profit"] = df["Profit"].fillna(df["Profit"].mean())
 
-#Step 6: Display summary statistics
+# Step 4: Fill missing Region with mode (most frequent value)
+df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
 
+# Step 5: Remove duplicate records
+df = df.drop_duplicates()
+
+print("\n---- Cleaned Retail Dataset ----")
+display(df)
+print("Dataset Shape after Cleaning:", df.shape)
+
+# Step 6: Display summary statistics
+print("\nSummary Statistics:")
+display(df.describe())
 
 
 ## Output
 
+<img width="530" height="381" alt="image" src="https://github.com/user-attachments/assets/aa3746da-072b-49df-9636-0a21dd672490" />
+
+<img width="605" height="647" alt="image" src="https://github.com/user-attachments/assets/2f8cf023-3ff1-4098-8505-e85ade65b0f3" />
 
 ## Result
 The program successfully creates a retail dataset, identifies missing entries and duplicate rows, imputes missing values using mean and mode strategies, removes duplicates, and outputs a clean dataset ready for downstream analysis.
