@@ -38,8 +38,6 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 ## Program
 
 import pandas as pd
-
-# Step 1: Create a sample retail dataset
 data = {
     "Order_ID": [101, 102, 103, 104, 105, 105, 106, 107],
     "Product": ["Laptop", "Tablet", "Phone", "Printer", "Monitor", "Monitor", "Tablet", "Laptop"],
@@ -48,33 +46,20 @@ data = {
     "Discount": [5, None, 10, 8, 5, 5, None, 8],
     "Profit": [8000, 5000, 4000, None, 3000, 3000, 5000, 8000]
 }
-
 df = pd.DataFrame(data)
-
 print("---- Original Retail Dataset ----")
 display(df)
 print("Dataset Shape:", df.shape)
-
-# Step 2: Check for missing values
 print("\nMissing Values per Column:")
 print(df.isnull().sum())
-
-# Step 3: Fill missing numeric values with column means
 df["Sales"] = df["Sales"].fillna(df["Sales"].mean())
 df["Discount"] = df["Discount"].fillna(df["Discount"].mean())
 df["Profit"] = df["Profit"].fillna(df["Profit"].mean())
-
-# Step 4: Fill missing Region with mode (most frequent value)
 df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
-
-# Step 5: Remove duplicate records
 df = df.drop_duplicates()
-
 print("\n---- Cleaned Retail Dataset ----")
 display(df)
 print("Dataset Shape after Cleaning:", df.shape)
-
-# Step 6: Display summary statistics
 print("\nSummary Statistics:")
 display(df.describe())
 
