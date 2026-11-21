@@ -37,31 +37,31 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 
 ## Program
 
-import pandas as pd
-data = {
-    "Order_ID": [101, 102, 103, 104, 105, 105, 106, 107],
-    "Product": ["Laptop", "Tablet", "Phone", "Printer", "Monitor", "Monitor", "Tablet", "Laptop"],
-    "Region": ["East", "West", "North", "South", "East", "East", "West", None],
-    "Sales": [55000, 32000, None, 18000, 24000, 24000, 32000, 55000],
-    "Discount": [5, None, 10, 8, 5, 5, None, 8],
-    "Profit": [8000, 5000, 4000, None, 3000, 3000, 5000, 8000]
-}
-df = pd.DataFrame(data)
-print("---- Original Retail Dataset ----")
-display(df)
-print("Dataset Shape:", df.shape)
-print("\nMissing Values per Column:")
-print(df.isnull().sum())
-df["Sales"] = df["Sales"].fillna(df["Sales"].mean())
-df["Discount"] = df["Discount"].fillna(df["Discount"].mean())
-df["Profit"] = df["Profit"].fillna(df["Profit"].mean())
-df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
-df = df.drop_duplicates()
-print("\n---- Cleaned Retail Dataset ----")
-display(df)
-print("Dataset Shape after Cleaning:", df.shape)
-print("\nSummary Statistics:")
-display(df.describe())
+import pandas as pd  
+data = {  
+    "Order_ID": [101, 102, 103, 104, 105, 105, 106, 107],  
+    "Product": ["Laptop", "Tablet", "Phone", "Printer", "Monitor", "Monitor", "Tablet", "Laptop"],  
+    "Region": ["East", "West", "North", "South", "East", "East", "West", None],  
+    "Sales": [55000, 32000, None, 18000, 24000, 24000, 32000, 55000],  
+    "Discount": [5, None, 10, 8, 5, 5, None, 8],  
+    "Profit": [8000, 5000, 4000, None, 3000, 3000, 5000, 8000]  
+}  
+df = pd.DataFrame(data)  
+print("---- Original Retail Dataset ----")  
+display(df)  
+print("Dataset Shape:", df.shape)  
+print("\nMissing Values per Column:")  
+print(df.isnull().sum())  
+df["Sales"] = df["Sales"].fillna(df["Sales"].mean())  
+df["Discount"] = df["Discount"].fillna(df["Discount"].mean())  
+df["Profit"] = df["Profit"].fillna(df["Profit"].mean())  
+df["Region"] = df["Region"].fillna(df["Region"].mode()[0])  
+df = df.drop_duplicates()  
+print("\n---- Cleaned Retail Dataset ----")  
+display(df)  
+print("Dataset Shape after Cleaning:", df.shape)  
+print("\nSummary Statistics:")  
+display(df.describe())  
 
 
 ## Output
